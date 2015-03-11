@@ -241,4 +241,167 @@ x[,2] # whole second column vector
 # use drop=FALSE to ensure you get a matrix back, instead of say .. a vector
 x[1,2, drop = FALSE]
 
+# partial matching
+x <- list(ardvark = 1:5)
+x
+# fuzzy match on name with "a"
+# ardvark is only element (vector), so this returns that vector
+x$a
+# double bracket doest work with fuzzy matching
+x[["a"]]
+# ensure fuzzy matching is on
+x[["a", exact = FALSE]]
+
+#removing NA values
+x <- c(1,2,NA,4,NA,5)
+# identify which are NA
+bad <- is.na(x)
+bad
+# colect only FALSE items
+x[!bad]
+
+x <- c(1,2,NA,4,NA,5)
+y <- c("a","b",NA,"d",NA, NA)
+
+# get a boolean list of which positions are NA in either vector x or y
+good <- complete.cases(x,y)
+good
+
+x[good]
+y[good]
+
+#print first 6 rows of built-in sample dataframe
+airquality[1:6, ]
+
+# get booleans for rows.  true if no NA values
+good <- complete.cases(airquality)
+good
+# print first 6 good rows
+airquality[good,][1:6,]
+
+# vectorized operations
+x <- 1:4
+y <- 6:9
+x
+y
+# add each element of x to the corresponding element of y
+# works with * / - .... etc
+x + y
+
+# matrix operations
+x <- matrix(1:4,2,2)
+y <- matrix(rep(10,4),2,2)
+x
+y
+
+# multiply the matrix elements
+x * y
+
+x / y
+
+# true matrix multiplication
+x
+y
+x %*% y
+
+############
+#  Week 2 Starts Here
+############
+x <- 0
+y <- 1
+z <- 2
+# if statements
+if(x > 0)
+{
+  x
+} else if(x > 1) {
+  y
+} else { z }
+
+# for loops
+for(i in 1:10)
+{
+  print(i)
+}
+
+x <- c("a", "b", "c", "d")
+
+for(i in 1:4) { print(x[i]) }
+
+for(i in seq_along(x)) print(x[i])
+
+for(letter in x) print(letter)
+
+x <- matrix(1:6, 2 , 3)
+
+for(i in seq_len(nrow(x))) {
+  for(j in seq_len(ncol(x))) {
+    print(x[i,j])
+  }
+}
+
+# while loop
+count <- 0
+while(count < 10)
+{
+  print(count)
+  count <- count + 1
+}
+
+
+# # repeat loop
+# x0 <- 1
+# tol <- 1e-8
+# 
+# repeat {
+#   x1 <- computeEstimate()
+#   
+#   if(abs(x1-x0) < tol)
+#   {
+#     break
+#   } else {
+#     x0 <- x1
+#   }
+# }
+
+# next , return
+# next is used to skip an iteration
+
+for(i in 1:20)
+{
+  if(i <= 10) { next } 
+  print(i)
+}
+
+# writing functions
+add2 <- function(x,y)
+{
+  x + y # no explicit return required
+}
+
+add2(1,3)
+
+above <- function(x,y=10) #notice default argument value
+{
+  use <- x > y
+  x[use]
+}
+
+x <- c(10,11,5)
+above(x,9)
+above(x) # called with default value for y
+
+# calculate the means of the columns in airquality dataframe
+columnmean <- function(y, removeNA=TRUE)
+{
+  nc <- ncol(y)
+  means <- numeric(nc)
+  for(i in 1:nc){
+    means[i] <- mean(y[,i], na.rm = removeNA)
+  }
+  means
+}
+
+columnmean(airquality, FALSE)
+
 
