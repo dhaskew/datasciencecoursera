@@ -1,0 +1,16 @@
+#source("http://spark-public.s3.amazonaws.com/compdata/scripts/getmonitor-test.R")
+#getmonitor.testscript()
+
+#source("http://spark-public.s3.amazonaws.com/compdata/scripts/complete-test.R")
+#complete.testscript()
+
+#source("http://spark-public.s3.amazonaws.com/compdata/scripts/corr-test.R")
+#corr.testscript()
+setwd(dir = "~/code/projects/datasciencecoursera/02_R_Programming/week_2/")
+source("http://d396qusza40orc.cloudfront.net/rprog%2Fscripts%2Fsubmitscript1.R")
+source("corr.R")
+source("pollutantmean.R")
+#complete()
+#corr()
+#x <- pollutantmean("specdata", pollutant="sulfate",1:10)
+submit()
